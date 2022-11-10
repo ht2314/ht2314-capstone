@@ -38,7 +38,26 @@ jobs:
       - run:
           name: lint
           command: npm run lint
-
+  
+  build-docker-image:
+    docker:
+      - image: cimg/node:18.12.0
+        auth:
+          username: $DOCKER_USER
+          password: $DOCKER_PW
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.20
+      - run:
+          name: build docker image
+          command: docker build -t capstone .
+      - run:
+          name: tag docker image
+          command: docker tag capstone ht2314/capstone:${CIRCLE_WORKFLOW_ID:0:7}
+      - run:
+          name: push docker image
+          command: docker push ht2314/capstone:${CIRCLE_WORKFLOW_ID:0:7}
 workflows:
   default:
     jobs:
