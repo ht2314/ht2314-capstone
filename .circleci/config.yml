@@ -42,15 +42,14 @@ jobs:
             npm run lint
 
   build-docker-image:
-    docker:
-      - image: cimg/node:18.12.0
-        auth:
-          username: $DOCKER_USER
-          password: $DOCKER_PW
+    <<: *default-node-image
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 20.10.20
+      - restore_cache:
+          key: app-dependencies-{{ checksum "package-lock.json" }}
+      - run:
+          name: login into dockerhub
+          command: docker login --user $DOCKER_USER --password $DOCKER_PW
       - run:
           name: build docker image
           command: docker build -t capstone .
@@ -60,6 +59,7 @@ jobs:
       - run:
           name: push docker image
           command: docker push ht2314/capstone:${CIRCLE_WORKFLOW_ID:0:7}
+          
 workflows:
   default:
     jobs:
