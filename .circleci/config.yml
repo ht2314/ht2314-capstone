@@ -68,3 +68,5 @@ workflows:
           requires: [build]
       - lint:
           requires: [build]
+      - build-docker-image:
+          requires: [lint, test]
