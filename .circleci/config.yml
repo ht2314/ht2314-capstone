@@ -1,0 +1,49 @@
+version: 2.1
+
+default-node-image: &default-node-image
+  docker:
+    - image: cimg/node:18.12.0
+
+jobs:
+  build:
+    <<: *default-node-image
+    steps:
+      - checkout
+      - run:
+          name: install dependencies
+          command: npm install
+      - run:
+          name: build
+          command: npm run build
+      - save_cache:
+          paths: [./node_modules]
+          key: app-dependencies
+
+  test:
+    <<: *default-node-image
+    steps:
+      - checkout
+      - restore_cache:
+          key: app-dependencies
+      - run:
+          name: run unit tests
+          command: npm run test
+  
+  lint:
+    <<: *default-node-image
+    steps:
+      - checkout
+      - restore_cache:
+          key: app-dependencies
+      - run:
+          name: lint
+          command: npm run lint
+
+workflows:
+  default:
+    jobs:
+      - build
+      - test:
+          requires: [build]
+      - lint:
+          requires: [build]
