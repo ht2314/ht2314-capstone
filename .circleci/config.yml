@@ -17,14 +17,14 @@ jobs:
           command: npm run build
       - save_cache:
           paths: [./node_modules]
-          key: app-dependencies
+          key: app-dependencies-{{ checksum "package-lock.json" }}
 
   test:
     <<: *default-node-image
     steps:
       - checkout
       - restore_cache:
-          key: app-dependencies
+          key: app-dependencies-{{ checksum "package-lock.json" }}
       - run:
           name: run unit tests
           command: npm run test
@@ -34,7 +34,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: app-dependencies
+          key: app-dependencies-{{ checksum "package-lock.json" }}
       - run:
           name: lint
           command: npm run lint
