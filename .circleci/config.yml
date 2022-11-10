@@ -42,7 +42,8 @@ jobs:
             npm run lint
 
   build-docker-image:
-    <<: *default-node-image
+    machine:
+      image: ubuntu-2204:2022.10.2
     steps:
       - checkout
       - restore_cache:
