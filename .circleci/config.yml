@@ -37,8 +37,10 @@ jobs:
           key: app-dependencies-{{ checksum "package-lock.json" }}
       - run:
           name: lint
-          command: npm run lint
-  
+          command: |
+            npm run format
+            npm run lint
+
   build-docker-image:
     docker:
       - image: cimg/node:18.12.0
