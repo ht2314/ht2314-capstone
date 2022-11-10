@@ -19,7 +19,7 @@ jobs:
           name: build
           command: npm run build
       - save_cache:
-          paths: [./node_modules, ./.svelte-kit]
+          paths: [./node_modules, .svelte-kit]
           key: app-dependencies-{{ checksum "package-lock.json" }}
 
   test:
