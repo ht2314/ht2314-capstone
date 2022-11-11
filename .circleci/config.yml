@@ -99,8 +99,7 @@ jobs:
     <<: *default-node-image
     executor: aws-cli/default
     steps:
-      - aws-cli/setup:
-          aws-region: us-east-1
+      - aws-cli/setup
       - install-kubectl
       - install-eksctl
       - run:
@@ -123,8 +122,7 @@ jobs:
     <<: *default-node-image
     executor: aws-cli/default
     steps:
-      - aws-cli/setup:
-          aws-region: us-east-1
+      - aws-cli/setup
       - install-eksctl
       - install-kubectl
       - run:
