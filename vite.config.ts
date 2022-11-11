@@ -2,7 +2,7 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { loadEnv } from 'vite';
 import type { UserConfig } from 'vite';
 
-const env = loadEnv(undefined, process.cwd(), '');
+const env = loadEnv('', process.cwd(), '');
 
 const config: UserConfig = {
 	plugins: [sveltekit()],
