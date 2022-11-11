@@ -105,6 +105,7 @@ jobs:
       - run:
           name: create cluster
           command: |
+            aws eks list-clusters
             capstone=$(aws eks list-clusters | grep "capstone-project")
             if [[ -n "$capstone" ]]; then
                 echo "capstone project already exists, skipping creatiion new cluster"
