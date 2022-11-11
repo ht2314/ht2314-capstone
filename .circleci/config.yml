@@ -108,7 +108,12 @@ jobs:
             if [[ -n "$capstone" ]]; then
                 echo "capstone project already exists, skipping creatiion new cluster"
             else
-                eksctl create cluster --name capstone-project --region=us-east-1
+                eksctl create cluster --name capstone-project --region=us-east-1 --node-type t2.small --managed
+                kubectl create deploy capstone-project --image=ht2314/capstone
+                kubectl rollout status deployment/capstone-project
+                kubectl describe deployment capstone-project
+                kubectl expose deployment capstone-project --name capstone-lb --type loadBalancer --port 4173
+                sleep 300
             fi
       - destroy-cluster
 
@@ -118,6 +123,7 @@ jobs:
     steps:
       - aws-cli/setup
       - checkout
+      - install-eksctl
       - install-kubectl
       - run:
           name: set up cluster config
@@ -127,10 +133,13 @@ jobs:
           name: update to new version
           command: |
             kubectl set image deployments/capstone-project capstone-project=ht2314/capstone:${CIRCLE_WORKFLOW_ID:0:7}
+            kubectl rollout status deployment/capstone-project
+            kubectl describe deployment capstone-project
 
 workflows:
   default:
     jobs:
+      - create-infra
       - build
       - test:
           requires: [build]
@@ -138,7 +147,5 @@ workflows:
           requires: [build]
       - build-docker-image:
           requires: [lint, test]
-      - create-infra:
-          requires: [build-docker-image]
       - deploy:
-          requires: [create-infra]
+          requires: [create-infra, build-docker-image]

@@ -11,7 +11,7 @@ const config = {
 		adapter: adapter()
 	},
 	env: {
-		__CIRCLE_CI_VERSION__: 'hello'
+		publicPrefx: 'CIRCLE'
 	}
 };
 
