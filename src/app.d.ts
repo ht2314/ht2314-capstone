@@ -8,4 +8,4 @@ declare namespace App {
 	// interface Platform {}
 }
 
-declare const __CRICLE_CI_VERSION__: string
+declare const __CIRCLE_CI_VERSION__: string
