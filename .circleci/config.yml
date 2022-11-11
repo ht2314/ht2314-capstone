@@ -105,7 +105,6 @@ jobs:
       - run:
           name: create cluster
           command: |
-            aws eks list-clusters
             capstone=$(aws eks list-clusters | grep -q "capstone-project" || true)
             echo $capstone
             if [[ -n "$capstone" ]]
