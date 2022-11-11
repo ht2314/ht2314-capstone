@@ -99,13 +99,13 @@ jobs:
     <<: *default-node-image
     executor: aws-cli/default
     steps:
-      - aws-cli/setup
+      - aws-cli/setup:
+          aws-region: us-east-1
       - install-kubectl
       - install-eksctl
       - run:
           name: create cluster
           command: |
-            aws eks list-clusters --region us-east-1
             capstone=$(aws eks list-clusters | grep "capstone-project")
             if [[ -n "$capstone" ]]; then
                 echo "capstone project already exists, skipping creatiion new cluster"
@@ -123,7 +123,8 @@ jobs:
     <<: *default-node-image
     executor: aws-cli/default
     steps:
-      - aws-cli/setup
+      - aws-cli/setup:
+          aws-region: us-east-1
       - install-eksctl
       - install-kubectl
       - run:
