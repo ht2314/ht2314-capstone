@@ -109,10 +109,13 @@ jobs:
             if [[ -n "$capstone" ]]; then
                 echo "capstone project already exists, skipping creatiion new cluster"
             else
+                echo "creating cluster"
                 eksctl create cluster --name capstone-project --region us-east-1 --node-type t2.small --managed
+                echo "deploying image"
                 kubectl create deploy capstone-project --image=ht2314/capstone
                 kubectl rollout status deployment/capstone-project
                 kubectl describe deployment capstone-project
+                echo "expose"
                 kubectl expose deployment capstone-project --name capstone-lb --type loadBalancer --port 4173
                 sleep 300
             fi
