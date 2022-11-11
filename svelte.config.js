@@ -9,6 +9,9 @@ const config = {
 
 	kit: {
 		adapter: adapter()
+	},
+	env: {
+		__CIRCLE_CI_VERSION__: 'hello'
 	}
 };
 
