@@ -11,7 +11,7 @@ commands:
   install-kubectl:
     description: resusable command to install kubectl
     steps:
-      - run: 
+      - run:
           name: install kubectl
           command: |
             curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.23.7/2022-06-29/bin/linux/amd64/kubectL
@@ -28,7 +28,7 @@ commands:
           command: |
             curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
             sudo mv /tmp/eksctl /usr/local/bin
-  
+
   destroy-cluster:
     description: destroy cluster if there is a failure in creation
     steps:
@@ -94,7 +94,7 @@ jobs:
       - run:
           name: push docker image
           command: docker push ht2314/capstone:${CIRCLE_WORKFLOW_ID:0:7}
-    
+
   create-infra:
     <<: *default-node-image
     executor: aws-cli/default
