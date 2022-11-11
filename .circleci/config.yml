@@ -99,6 +99,7 @@ jobs:
     <<: *default-node-image
     executor: aws-cli/default
     steps:
+      - aws-cli/setup
       - install-kubectl
       - install-eksctl
       - run:
@@ -122,7 +123,6 @@ jobs:
     executor: aws-cli/default
     steps:
       - aws-cli/setup
-      - checkout
       - install-eksctl
       - install-kubectl
       - run:
