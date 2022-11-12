@@ -36,7 +36,7 @@ commands:
           name: destroy cluster
           when: on_fail
           command: |
-            eksctl delete cluster --region=us-east-1 --name=capstone-project
+            eksctl delete cluster --region=us-east-1 --name=capstone-project --profile capstone-user
 
   configure-aws-capstone-profile:
     description: configure to the capstone-user profile for aws
@@ -87,7 +87,7 @@ jobs:
       - run:
           name: install hadolint
           command: |
-            wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64 &&\
+            sudo wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64
             sudo chmod +x /bin/hadolint
       - run:
           name: lint dockerfile
