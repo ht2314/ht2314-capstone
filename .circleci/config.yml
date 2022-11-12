@@ -38,7 +38,7 @@ commands:
           command: |
             eksctl delete cluster --region=us-east-1 --name=capstone-project
 
-  congiure-aws-capstone-profile:
+  configure-aws-capstone-profile:
     description: configure to the capstone-user profile for aws
     steps:
       - run:
