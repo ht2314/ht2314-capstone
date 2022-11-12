@@ -129,7 +129,7 @@ jobs:
       - run:
           name: create cluster
           command: |
-            capstone=$(aws eks list-clusters | grep -q "capstone-project" || true)
+            capstone=$(aws eks list-clusters | grep "capstone-project" || true)
             echo $capstone
             if [[ -n "$capstone" ]]
             then
@@ -160,7 +160,7 @@ jobs:
       - run:
           name: update to new version
           command: |
-            kubectl set image deployments/capstone-project capstone-project=ht2314/capstone:${CIRCLE_WORKFLOW_ID:0:7}
+            kubectl set image deployment/capstone-project capstone-project=ht2314/capstone:${CIRCLE_WORKFLOW_ID:0:7}
             kubectl rollout status deployment/capstone-project
             kubectl describe deployment capstone-project
 
