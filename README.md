@@ -26,12 +26,14 @@ npm run dev -- --open
 ```
 
 ## Testing
+To run unit tests against the source code run the command below
 
 ```bash
 npm run test
 ```
 
 ## Linting
+To lint the source code run the following command
 
 ```bash
 npm run lint
