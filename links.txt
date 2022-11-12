@@ -1,0 +1,4 @@
+github repo - https://github.com/ht2314/ht2314-capstone
+docker hub - https://hub.docker.com/repository/docker/ht2314/capstone
+app api - http://aaf16a44b6eb4445e9be3f2122620876-544731471.us-east-1.elb.amazonaws.com:4173/api/test
+app home page - http://aaf16a44b6eb4445e9be3f2122620876-544731471.us-east-1.elb.amazonaws.com:4173/
