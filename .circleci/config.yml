@@ -46,9 +46,13 @@ commands:
           command: | 
             cd ~
             cd .aws
-            echo "\n[profile capstone-user]\nregion=$AWS_DEFAULT_REGION\noutput=json" >> config
-            echo "\n[capstone-user]\naws_access_key_id=$AWS_ACCESS_KEY_ID\naws_secret_access_key=$AWS_SECRET_ACCESS_KEY"
-
+            echo "[profile capstone-user]" >> config
+            echo "region=$AWS_DEFAULT_REGION" >> config
+            echo "output=json" >> config
+            echo "[capstone-user]" >> credentials
+            echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> credentials
+            echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" >> credentials
+            
 jobs:
   build:
     <<: *default-node-image
@@ -84,7 +88,7 @@ jobs:
           name: install hadolint
           command: |
             wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64 &&\
-            chmod +x /bin/hadolint
+            sudo chmod +x /bin/hadolint
       - run:
           name: lint dockerfile
           command: hadolint Dockerfile
