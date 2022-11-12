@@ -170,7 +170,6 @@ workflows:
   default:
     jobs:
       - create-infra
-      - build
       - test:
           requires: [build]
       - lint:
