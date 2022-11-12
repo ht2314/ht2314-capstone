@@ -160,6 +160,7 @@ jobs:
       - run:
           name: update to new version
           command: |
+            kubectl get deployments
             kubectl set image deployment/capstone-project capstone-project=ht2314/capstone:${CIRCLE_WORKFLOW_ID:0:7}
             kubectl rollout status deployment/capstone-project
             kubectl describe deployment capstone-project
