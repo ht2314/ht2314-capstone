@@ -95,6 +95,7 @@ jobs:
       - run:
           name: lint code
           command: |
+            npm i
             npm run format
             npm run lint
 
