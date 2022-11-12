@@ -43,7 +43,7 @@ commands:
     steps:
       - run:
           name: create new non default aws profile
-          command: | 
+          command: |
             cd ~
             cd .aws
             echo "[profile capstone-user]" >> config
@@ -52,7 +52,7 @@ commands:
             echo "[capstone-user]" >> credentials
             echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> credentials
             echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" >> credentials
-            
+
 jobs:
   build:
     <<: *default-node-image
