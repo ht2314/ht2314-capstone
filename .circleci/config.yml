@@ -170,10 +170,8 @@ workflows:
   default:
     jobs:
       - create-infra
-      - test:
-          requires: [build]
-      - lint:
-          requires: [build]
+      - test
+      - lint
       - build-docker-image:
           requires: [lint, test]
       - deploy:
